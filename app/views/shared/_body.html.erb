@@ -1,0 +1,19 @@
+<div class="container-fluid pb-3">
+
+    <div class="d-grid gap-3" style="grid-template-columns: 1fr 2fr;">
+
+      <div class="bg-light border rounded-3">
+        <ul>
+            <li><%= link_to "Categories", categories_path %></li>
+            <li><%= link_to "Operations", operations_path %></li>
+            <li><%= link_to "Reports", reports_index_path %></li>
+        </ul>
+      </div>
+
+      <div class="bg-light border rounded-3">
+        <%= yield %>
+      </div>
+
+    </div>
+
+  </div>
