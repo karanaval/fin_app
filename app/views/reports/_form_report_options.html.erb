@@ -1,0 +1,36 @@
+<form action="report_by_category" method="GET">
+
+    <table>
+        <tr>
+            <th><label for="categories">Choose a category:</label></th>
+            <th>
+                <select  name="categories" id="categories" class="form-select" aria-label="Default select example" style="width:200px">
+                    <option selected>Category</option>
+                    <option value="name"> cat1 </option>
+                    <option value="name"> cat2 </option>
+                    <option value="name"> cat3 </option>
+                </select>
+            </th>
+    </table>
+
+    <%= link_to "Report by categories", reports_report_by_category_path %>
+
+</form>
+
+<form>
+
+    <table>
+        <tr>
+            <th><label for="categories">Date from:</label></th>
+            <th><%= date_field(:odate, min: Date.today) %><br></th>
+        </tr>
+        <tr>
+            <th style="text-align:right"628><label for="categories">Date to:</label></th>
+            <th><%= date_field(:odate, max: Date.today) %><br></th>
+        </tr>
+
+    </table>
+
+    <%= link_to "Report by dates", reports_report_by_dates_path %>
+
+</form>
