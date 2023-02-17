@@ -2,12 +2,20 @@
 
     <div class="d-grid gap-3" style="grid-template-columns: 1fr 2fr;">
 
-      <div class="bg-light border rounded-3">
-        <ul>
-            <li><%= link_to "Categories", categories_path %></li>
-            <li><%= link_to "Operations", operations_path %></li>
-            <li><%= link_to "Reports", reports_index_path %></li>
+      <div class="bg-light border rounded-3" style="text-align:right;">
+
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/categories">Categories</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/operations">Operations</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/reports/index">Reports</a>
+          </li>
         </ul>
+
       </div>
 
       <div class="bg-light border rounded-3">
