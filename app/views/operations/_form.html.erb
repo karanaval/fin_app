@@ -26,9 +26,9 @@
     <%= form.text_field :description %>
   </div>
 
+
   <div>
-    <%= form.label :category_id, style: "display: block" %>
-    <%= form.text_field :category_id %>
+    <%= select_tag(:category_id, options_for_select(@categories_options)) %>
   </div>
 
   <div>
