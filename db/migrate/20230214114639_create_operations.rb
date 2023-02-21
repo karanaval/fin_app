@@ -2,7 +2,7 @@ class CreateOperations < ActiveRecord::Migration[7.0]
   def change
     create_table :operations do |t|
       t.decimal :amount
-      t.datetime :odate
+      t.date :odate
       t.string :description
       t.references :category, null: false, foreign_key: true
 
