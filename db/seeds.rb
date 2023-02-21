@@ -32,8 +32,8 @@ end
 
 200.times do
   Operation.create(
-    amount: (Faker::Number.within(range: 0.1..2000.0)).round(2),
-    odate: Faker::Time.between(from: DateTime.now - 30, to: DateTime.now, format: :default),
+    amount: Faker::Commerce.price(range: 0..5000.00),
+    odate: Faker::Date.between(from: Date.today - 30, to: Date.today),
     description: "Testing Data",
     category_id: rand(1..Category.all.length)
   )
