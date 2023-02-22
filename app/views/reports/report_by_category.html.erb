@@ -7,14 +7,10 @@
     const ctx = document.getElementById('myChart').getContext('2d');
 
     const data = {
-        labels: [
-            'Red',
-            'Blue',
-            'Yellow'
-        ],
+        labels: <%= raw @categories_ids %>,
         datasets: [{
             label: 'Витрати за катеґоріями',
-            data: [300, 50, 100, 34, 78],
+            data: <%= @amounts_per_categories %>,
             backgroundColor: [
             'rgb(255, 99, 132)',
             'rgb(54, 162, 235)',
