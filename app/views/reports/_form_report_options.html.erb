@@ -1,36 +1,64 @@
-<form action="report_by_category" method="GET">
+<h3>By categories</h3>
+<%= form_tag '/reports/report_by_category' do %>
+    <div class="container">
 
-    <table>
-        <tr>
-            <th><label for="categories">Choose a category:</label></th>
-            <th>
-                <select  name="categories" id="categories" class="form-select" aria-label="Default select example" style="width:200px">
-                    <option selected>Category</option>
-                    <option value="name"> cat1 </option>
-                    <option value="name"> cat2 </option>
-                    <option value="name"> cat3 </option>
-                </select>
-            </th>
-    </table>
+        <div class="row">
+            <div class="col-sm">
+                <label>Choose a category:</label>
+                <%= select(:operation, :category_id, options_for_select(@categories_options), { :prompt => 'All Categories' }) %>
+            </div>
+        </div>
 
-    <%= link_to "Report by categories", reports_report_by_category_path %>
+        <div class="row">
+            <div class="col-sm">
+                <label for="categories">Date from:<%= date_field(:odate_from, max: Date.today) %></label>
+            </div>
+        </div>
 
-</form>
+        <div class="row">
+            <div class="col-sm">
+                <label>Date to:<%= date_field(:odate_to, max: Date.today) %></label>
+            </div>
+        </div>
 
-<form>
+        <div class="row">
+            <div class="col-sm">
+                <%= submit_tag 'By Category', name: 'by_category' %>
+            </div>
+        </div>
 
-    <table>
-        <tr>
-            <th><label for="categories">Date from:</label></th>
-            <th><%= date_field(:odate, min: Date.today) %><br></th>
-        </tr>
-        <tr>
-            <th style="text-align:right"628><label for="categories">Date to:</label></th>
-            <th><%= date_field(:odate, max: Date.today) %><br></th>
-        </tr>
+    </div>
+<% end %><br>
 
-    </table>
+<h3>By dates</h3>
 
-    <%= link_to "Report by dates", reports_report_by_dates_path %>
+<%= form_tag '/reports/report_by_dates' do %>
+    <div class="container">
 
-</form>
+        <div class="row">
+            <div class="col-sm">
+                <label>Choose a category:</label>
+                <%= select(:operation, :category_id, options_for_select(@categories_options), { :prompt => 'All Categories' }) %>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm">
+                <label for="categories">Date from:<%= date_field(:odate_from, max: Date.today) %></label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm">
+                <label>Date to:<%= date_field(:odate_to, max: Date.today) %></label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm">
+                <%= submit_tag 'By Dates' %>
+            </div>
+        </div>
+
+    </div>
+<% end %>

@@ -4,10 +4,11 @@
 <canvas id="myChart" width="400" height="400"></canvas>
 
 <script>
+
     const ctx = document.getElementById('myChart').getContext('2d');
 
     const data = {
-        labels: <%= raw @categories_ids %>,
+        labels: <%= raw @categories_names %>,
         datasets: [{
             label: 'Витрати за катеґоріями',
             data: <%= @amounts_per_categories %>,
