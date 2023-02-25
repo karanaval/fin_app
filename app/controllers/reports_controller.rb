@@ -3,61 +3,40 @@ class ReportsController < ApplicationController
     @categories_options = Category.all.map{ |cat| [cat.name, cat.id] }
   end
 
+  def count_amounts_per_argument(arg)
+    result = arg.inject({}) do |acc, op_per_cat|
+      cat_name, amount = *op_per_cat
+      acc[cat_name] =  acc[cat_name] ? acc[cat_name] += amount : amount
+      acc
+    end
+  end
+
   def report_by_category
 
     user_choice_cat = params[:operation][:category_id]
     user_choice_date = *params[:odate_from].values, *params[:odate_to].values
 
-    if user_choice_cat == "" and user_choice_date == ["", ""]  then
+    all_categories = user_choice_cat == ""
+    all_dates = user_choice_date == ["", ""]
 
-      categories_options = Category.pluck(:id, :name)
-      operations_data = Operation.pluck(:category_id, :amount).map { |op| [op[0].to_s, op[1]] }.sort_by { |op| op[0] }
+    if all_categories and all_dates then
+      categories_options = Category.pluck(:id, :name).to_h
+      operations_data = Operation.pluck(:category_id, :amount).map { |op| [categories_options[op[0]].to_s, op[1]] }
+      operations_per_cat_name = count_amounts_per_argument(operations_data)
+      @categories_names = operations_per_cat_name.keys
+      @amounts_per_categories = operations_per_cat_name.values
 
-      operations_per_cat_id = operations_data.inject({}) do |acc, op_per_cat|
-        cat_id, amount = *op_per_cat
-        acc[cat_id] =  acc[cat_id] ? acc[cat_id] += amount : amount
-        acc
-      end
+    elsif all_categories and not all_dates
+      categories_options = Category.pluck(:id, :name).to_h
 
-      operations_per_cat_name = []
-      for i in (0...operations_per_cat_id.length) do
-
-        key_id = categories_options[i][0]
-        category_name = categories_options[i][1]
-        category_amount = operations_per_cat_id["#{key_id}"]
-
-        operations_per_cat_name.push([category_name, category_amount])
-      end
-
-      @categories_names = operations_per_cat_name.map { |data| data[0] }
-      @amounts_per_categories = operations_per_cat_name.map { |data| data[1].round() }
-
-    elsif user_choice_cat == "" and user_choice_date != ["", ""]
-
-      categories_options = Category.pluck(:id, :name)
       operations_data = Operation.where(odate: (user_choice_date[0]..user_choice_date[1])
-    ).pluck(:category_id, :amount).map { |op| [op[0].to_s, op[1]] }.sort_by { |op| op[0] }
+    ).pluck(:category_id, :amount).map { |op| [categories_options[op[0]].to_s, op[1]] }.sort_by { |op| op[0] }
 
-      operations_per_cat_id = operations_data.inject({}) do |acc, op_per_cat|
-        cat_id, amount = *op_per_cat
-        acc[cat_id] =  acc[cat_id] ? acc[cat_id] += amount : amount
-        acc
-      end
+      operations_per_cat_id = count_amounts_per_argument(operations_data)
+      @categories_names = operations_per_cat_id.map { |data| data[0] }
+      @amounts_per_categories = operations_per_cat_id.map { |data| data[1].round() }
 
-      operations_per_cat_name = []
-      for i in (0...operations_per_cat_id.length) do
-
-        key_id = categories_options[i][0]
-        category_name = categories_options[i][1]
-        category_amount = operations_per_cat_id["#{key_id}"]
-
-        operations_per_cat_name.push([category_name, category_amount])
-      end
-
-      @categories_names = operations_per_cat_name.map { |data| data[0] }
-      @amounts_per_categories = operations_per_cat_name.map { |data| data[1].round() }
-
-    elsif user_choice_cat != "" and user_choice_date == ["", ""]
+    elsif not all_categories and all_dates
       @categories_names = [Category.where(id: user_choice_cat.to_i).pluck(:name)]
       @amounts_per_categories = [Operation.where(category_id: user_choice_cat.to_i).pluck(:amount).sum]
 
@@ -66,6 +45,11 @@ class ReportsController < ApplicationController
       @amounts_per_categories = [Operation.where(
         category_id: user_choice_cat.to_i, odate: (user_choice_date[0]..user_choice_date[1])).pluck(:amount).sum]
     end
+
+    @category_name = user_choice_cat == "" ? "All categories" : Category.where(id: user_choice_cat).pluck(:name).join()
+    @dates_period = user_choice_date == ["", ""] ? "for all period" : "from #{
+      user_choice_date[0].split("-").reverse.join("-")} to #{user_choice_date[-1].split("-").reverse.join("-")}"
+
   end
 
 
@@ -105,6 +89,9 @@ class ReportsController < ApplicationController
 
     @dates = operations_per_date.map { |data| data[0] }
     @amounts_per_dates = operations_per_date.map { |data| data[1] }
+    @category_name = user_choice_cat == "" ? "All categories" : Category.where(id: user_choice_cat).pluck(:name).join()
+    @dates_period = user_choice_date == ["", ""] ? "for all period" : "from #{
+      user_choice_date[0].split("-").reverse.join("-")} to #{user_choice_date[-1].split("-").reverse.join("-")}"
 
   end
 
