@@ -1,31 +1,4 @@
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<h1>Report By Category</h1>
+<h1><%= @category_name %></h1>
+<h4><%= @dates_period %></h3>
 
-<canvas id="myChart" width="400" height="400"></canvas>
-
-<script>
-
-    const ctx = document.getElementById('myChart').getContext('2d');
-
-    const data = {
-        labels: <%= raw @categories_names %>,
-        datasets: [{
-            label: 'Витрати за катеґоріями',
-            data: <%= @amounts_per_categories %>,
-            backgroundColor: [
-            'rgb(255, 99, 132)',
-            'rgb(54, 162, 235)',
-            'rgb(255, 205, 86)'
-            ],
-            hoverOffset: 4
-        }]
-    };
-
-    const config = {
-        type: 'doughnut',
-        data: data,
-        };
-
-    const myChart = new Chart(ctx, config);
-
-</script>
+<%= render "chart_by_category" %>

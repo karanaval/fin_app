@@ -1,30 +1,4 @@
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<h1>Report by Dates <%= @d_from %> </h1>
+<h1><%= @category_name %></h1>
+<h4><%= @dates_period %></h3>
 
-<canvas id="myChart" width="400" height="400"></canvas>
-
-<script>
-    const ctx = document.getElementById('myChart').getContext('2d');
-
-    const data = {
-        labels: <%= raw @dates %>,
-        datasets: [{
-            label: 'Витрати за днями',
-            data: <%= @amounts_per_dates %>,
-            fill: false,
-            borderColor: 'rgb(75, 192, 192)',
-            tension: 0.1
-        }]
-    };
-
-    const config = {
-        type: 'line',
-        data: data,
-        options: {
-            responsive: false
-        }
-    };
-
-    const myChart = new Chart(ctx, config);
-
-</script>
+<%= render "_chart_by_dates" %>
