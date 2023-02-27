@@ -2,6 +2,10 @@
 
 <h1>Operations</h1>
 
+<div>
+  <%= link_to "New operation", new_operation_path %>
+</div>
+
 <div id="operations">
   <% @operations.each do |operation| %>
     <%= render operation %>
@@ -11,4 +15,4 @@
   <% end %>
 </div>
 
-<%= link_to "New operation", new_operation_path %>
+<%= paginate @operations %>

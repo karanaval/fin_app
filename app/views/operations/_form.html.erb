@@ -18,7 +18,7 @@
 
   <div>
     <%= form.label :odate, style: "display: block" %>
-    <%= form.datetime_field :odate %>
+    <%= form.date_select :odate %>
   </div>
 
   <div>
@@ -26,9 +26,9 @@
     <%= form.text_field :description %>
   </div>
 
+
   <div>
-    <%= form.label :category_id, style: "display: block" %>
-    <%= form.text_field :category_id %>
+    <%= select(:operation, :category_id, options_for_select(@categories_options)) %>
   </div>
 
   <div>
