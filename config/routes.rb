@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
 
   get 'reports/index'
-
-  # post 'reports/chose_report_type', to: 'reports#chose_report_type'
+  post 'reports/index', to: 'reports#choose_report_type'
 
   get 'reports/report_by_category'
   post 'reports/report_by_category'
