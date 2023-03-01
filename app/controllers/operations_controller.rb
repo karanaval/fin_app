@@ -4,6 +4,7 @@ class OperationsController < ApplicationController
   # GET /operations or /operations.json
   def index
     @operations = Operation.page(params[:page])
+    @categories_names = Category.pluck(:id, :name).to_h
   end
 
   # GET /operations/1 or /operations/1.json
@@ -13,7 +14,7 @@ class OperationsController < ApplicationController
   # GET /operations/new
   def new
     @operation = Operation.new
-    @categories_options = Category.all.map{ |cat| [cat.name, cat.id] }
+    @categories_options = Category.pluck(:name, :id)
   end
 
   # GET /operations/1/edit

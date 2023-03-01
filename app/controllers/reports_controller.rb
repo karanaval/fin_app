@@ -37,11 +37,11 @@ class ReportsController < ApplicationController
       @amounts_per_categories = operations_per_category_id.values
 
     elsif not all_categories and all_dates
-      @categories_names = [Category.where(id: user_choice_category.to_i).pluck(:name)]
+      @categories_names = Category.where(id: user_choice_category.to_i).pluck(:name)
       @amounts_per_categories = [Operation.where(category_id: user_choice_category.to_i).pluck(:amount).sum]
 
     else
-      @categories_names = [Category.where(id: user_choice_category.to_i).pluck(:name)]
+      @categories_names = Category.where(id: user_choice_category.to_i).pluck(:name)
       @amounts_per_categories = [Operation.where(category_id: user_choice_category.to_i, odate: (date_from..date_to)
       ).pluck(:amount).sum]
     end
