@@ -14,7 +14,6 @@ class ReportsController < ApplicationController
 
   # POST reports/report_by_category
   def report_by_category
-
     user_choice_category = params[:operation][:category_id]
     user_choice_date = params[:odate_from].values[0], params[:odate_to].values[0]
     date_from, date_to = *user_choice_date
@@ -57,50 +56,12 @@ class ReportsController < ApplicationController
     result = arg.pluck(:odate, :amount).map { |op| [op[0].to_s, op[1]] }.sort_by { |op| op[0] }
   end
 
-  # # POST reports/report_by_dates
-  # def report_by_dates
-
-  #   user_choice_category = params[:operation][:category_id]
-  #   user_choice_date = *params[:odate_from].values, *params[:odate_to].values
-  #   date_from, date_to = *user_choice_date
-
-  #   all_categories = user_choice_category == ""
-  #   all_dates = user_choice_date == ["", ""]
-
-  #   if all_categories and all_dates  then
-  #     operations_data = get_sorted_dates_and_amounts(Operation)
-
-  #   elsif all_categories and not all_dates then
-  #     operations_data = get_sorted_dates_and_amounts(Operation.where(odate: (date_from..date_to)))
-
-  #   elsif not all_categories and all_dates  then
-  #     operations_data = get_sorted_dates_and_amounts(Operation.where(category_id: user_choice_category))
-
-  #   else
-  #     operations_data = get_sorted_dates_and_amounts(
-  #       Operation.where(category_id: user_choice_category, odate: (date_from..date_to)))
-
-  #   end
-
-  #   operations_per_date = count_amounts_per(operations_data)
-
-  #   @dates = operations_per_date.map { |data| data[0] }
-  #   @amounts_per_dates = operations_per_date.map { |data| data[1] }
-  #   @category_name = all_categories ? "All categories" : Category.where(id: user_choice_category).pluck(:name).join()
-  #   @dates_period = all_dates ? "for all period" : "from #{
-  #     date_from.split("-").reverse.join("-")} to #{user_choice_date[-1].split("-").reverse.join("-")}"
-
-  # end
-
   # POST reports/report_by_dates
   def report_by_dates
 
     user_choice_category = params[:operation][:category_id]
     user_choice_date = *params[:odate_from].values, *params[:odate_to].values
     date_from, date_to = *user_choice_date
-
-    print "!!!!!"
-    puts user_choice_category, user_choice_date
 
     all_categories = user_choice_category == ""
     all_dates = user_choice_date == ["", ""]
@@ -130,14 +91,8 @@ class ReportsController < ApplicationController
 
   end
 
-
+  # POST
   def choose_report_type
-
-    parameters = [
-      params[:operation][:category_id],
-      params[:odate_from].values[0],
-      params[:odate_to].values[0]]
-
     if params[:by_category]      
       redirect_to reports_report_by_category_path(request.parameters)
     elsif params[:by_dates]

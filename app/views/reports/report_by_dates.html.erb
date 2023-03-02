@@ -1,27 +1,30 @@
 <h1><%= @category_name %></h1>
 <h4><%= @dates_period %></h3>
 
+
 <div class="container">
     <div class="row">
         <div class="col">
-            <table class="table table-striped" style="width:300px">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Amount</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% for i in (0...@dates.length) do %>
+            <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="scrollspy-example bg-body-tertiary p-3 rounded-2" tabindex="0">
+                  <table class="table table-striped" style="width:300px">
+                    <thead>
                         <tr>
-                            <th scope="row"><%= i + 1 %></th>
-                            <td><%= @dates[i] %></td>
-                            <td><%= @amounts_per_dates[i] %></td>
+                            <th scope="col">#</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Amount</th>
                         </tr>
-                    <% end %>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <% for i in (0...@dates.length) do %>
+                            <tr>
+                                <th scope="row"><%= i + 1 %></th>
+                                <td><%= @dates[i] %></td>
+                                <td><%= @amounts_per_dates[i] %></td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="col">
             <%= render "chart_by_dates" %>

@@ -4,7 +4,7 @@
 
         <div class="row">
             <div class="col-sm">
-                <label>Choose a category:</label>
+                <label>Category:</label>
                 <%= select(:operation, :category_id, options_for_select(@categories_options),
                     { :prompt => 'All Categories' }) %>
             </div>
