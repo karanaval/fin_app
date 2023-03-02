@@ -1,0 +1,18 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+<% require "faker" %>
+
+
+<% 1.upto(15) do |i| %>
+fix_<% i %>:
+  id: <% i %>,
+  name: <% Faker::Commerce.department(max: 1) %>,
+  description: Category <% i %> Testing Data
+<% end %>
+
+# one:
+#   name: MyString
+#   description: MyString
+
+# two:
+#   name: MyString
+#   description: MyString

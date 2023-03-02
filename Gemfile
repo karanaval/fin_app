@@ -48,6 +48,9 @@ gem "kaminari"
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
+# Code coverage
+gem 'simplecov', require: false, group: :test
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 

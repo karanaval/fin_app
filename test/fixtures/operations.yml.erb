@@ -1,0 +1,29 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+<% require "faker" %>
+
+
+<% 1.upto(300) do |i| %>
+fix_<% i %>:
+  amount: <% Faker::Commerce.price(range: 0..5000.00) %>,
+  odate: <% Faker::Date.between(from: Date.today - 90, to: Date.today) %>,
+  description: Operation <% i %> Testing Data,
+  category: fix_<% rand(1..15) %>
+<% end %>
+
+# one:
+#   amount: 9.99
+#   odate: 2023-01-13
+#   description: MyString
+#   category: one
+
+# two:
+#   amount: 11.56
+#   odate: 2023-02-14
+#   description: MyString
+#   category: two
+
+# three:
+#   amount: 5.93
+#   odate: 2023-02-01
+#   description: MyString
+#   category: two

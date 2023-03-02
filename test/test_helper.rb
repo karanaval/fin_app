@@ -1,6 +1,12 @@
+require 'simplecov'
+SimpleCov.start 'rails'
+
+
 ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
 require "rails/test_help"
+
+Faker::Config.random = Random.new
 
 class ActiveSupport::TestCase
   # Run tests in parallel with specified workers

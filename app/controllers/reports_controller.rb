@@ -1,4 +1,6 @@
 class ReportsController < ApplicationController
+  attr_reader :categories_names, :amounts_per_categories, :category_name, :dates_period
+
   def index
     @categories_options = Category.all.map{ |cat| [cat.name, cat.id] }
   end

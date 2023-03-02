@@ -1,7 +1,12 @@
 require "test_helper"
+require "./app/controllers/reports_controller"
 
 
 class ReportsControllerTest < ActionDispatch::IntegrationTest
+  # def setup
+    
+  # end
+
   test "should get index" do
     get reports_index_url
     assert_response :success
@@ -50,7 +55,11 @@ class ReportsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to reports_report_by_dates_path(request.parameters)    
   end
 
-  # # test "should count amounts per given argument" do
-  # #   assert_equal([], count_amounts_per([]))
-  # # end
+  # test "should count amounts per given argument" do
+  #   assert_equal([], count_amounts_per([]))
+  # end
+
+  # test "should sort dates and amounts" do
+  #   get_sorted_dates_and_amounts(arg)
+  # end
 end
