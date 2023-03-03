@@ -1,0 +1,67 @@
+# one:
+#   name: MyString
+#   description: MyString
+
+# two:
+#   name: MyString
+#   description: MyString
+
+fix_1:
+  name: Shoes
+  description: Category 1 Testing Data
+
+fix_2:
+  name: Jewelry
+  description: Category 2 Testing Data
+
+fix_3:
+  name: Industrial
+  description: Category 3 Testing Data
+
+fix_4:
+  name: Tools
+  description: Category 4 Testing Data
+
+fix_5:
+  name: Toys
+  description: Category 5 Testing Data
+
+fix_6:
+  name: Toys
+  description: Category 6 Testing Data
+
+fix_7:
+  name: Beauty
+  description: Category 7 Testing Data
+
+fix_8:
+  name: Baby
+  description: Category 8 Testing Data
+
+fix_9:
+  name: Games
+  description: Category 9 Testing Data
+
+fix_10:
+  name: Sports
+  description: Category 10 Testing Data
+
+fix_11:
+  name: Home
+  description: Category 11 Testing Data
+
+fix_12:
+  name: Toys
+  description: Category 12 Testing Data
+
+fix_13:
+  name: Health
+  description: Category 13 Testing Data
+
+fix_14:
+  name: Garden
+  description: Category 14 Testing Data
+
+fix_15:
+  name: Automotive
+  description: Category 15 Testing Data

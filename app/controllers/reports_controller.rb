@@ -1,6 +1,4 @@
 class ReportsController < ApplicationController
-  attr_reader :categories_names, :amounts_per_categories, :category_name, :dates_period
-
   def index
     @categories_options = Category.all.map{ |cat| [cat.name, cat.id] }
   end
@@ -29,9 +27,10 @@ class ReportsController < ApplicationController
       operations_per_category_name = count_amounts_per(operations_data)
       @categories_names = operations_per_category_name.keys
       @amounts_per_categories = operations_per_category_name.values
-
+      
     elsif all_categories and not all_dates
-      operations_data = Operation.where(odate: (date_from..date_to)).pluck(:category_id, :amount).map { |op| [categories_data[op[0]].to_s, op[1]] }.sort_by { |op| op[0] }
+      operations_data = Operation.where(odate: (date_from..date_to)).order(:category_id).pluck(
+        :category_id, :amount).map { |op| [categories_data[op[0]].to_s, op[1]] }
 
       operations_per_category_id = count_amounts_per(operations_data)
       @categories_names = operations_per_category_id.keys
@@ -55,7 +54,7 @@ class ReportsController < ApplicationController
 
   # Choose odate&amount attributes from Operations model
   def get_sorted_dates_and_amounts(arg)
-    result = arg.pluck(:odate, :amount).map { |op| [op[0].to_s, op[1]] }.sort_by { |op| op[0] }
+    result = arg.order(:odate).pluck(:odate, :amount).map { |op| [op[0].to_s, op[1]] }
   end
 
   # POST reports/report_by_dates

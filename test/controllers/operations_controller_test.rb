@@ -2,7 +2,7 @@ require "test_helper"
 
 class OperationsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @operation = operations(:one)
+    @operation = operations(:fix_1)
   end
 
   test "should get index" do

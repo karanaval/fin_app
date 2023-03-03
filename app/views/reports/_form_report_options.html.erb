@@ -1,33 +1,30 @@
-<h3>By categories</h3>
+<h5>Choose options for report</h5>
+
 <%= form_tag do %>
-    <div class="container">
-
-        <div class="row">
-            <div class="col-sm">
-                <label>Category:</label>
-                <%= select(:operation, :category_id, options_for_select(@categories_options),
-                    { :prompt => 'All Categories' }) %>
-            </div>
+    <div class="row">
+        <div class="col-sm">
+            <label>Category:</label>
+            <%= select(:operation, :category_id, options_for_select(@categories_options),
+                { :prompt => 'All Categories' }) %>
         </div>
-
-        <div class="row">
-            <div class="col-sm">
-                <label for="categories">Date from:<%= date_field(:odate_from, max: Date.today) %></label>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-sm">
-                <label>Date to:<%= date_field(:odate_to, max: Date.today) %></label>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-sm">
-                <%= submit_tag 'By Category', class: "btn btn-secondary", name: 'by_category' %>
-                <%= submit_tag 'By Dates', class: "btn btn-secondary", name: "by_dates" %>
-            </div>
-        </div>
-
     </div>
-<% end %><br>
+
+    <div class="row">
+        <div class="col-sm">
+            <label for="categories">Date from:<%= date_field(:odate_from, max: Date.today) %></label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm">
+            <label>Date to:<%= date_field(:odate_to, max: Date.today) %></label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm">
+            <%= submit_tag 'By Category', class: "btn btn-secondary", name: 'by_category' %>
+            <%= submit_tag 'By Dates', class: "btn btn-secondary", name: "by_dates" %>
+        </div>
+    </div>
+<% end %>
