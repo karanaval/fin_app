@@ -19,7 +19,7 @@ class ReportsController < ApplicationController
     date_from, date_to = *user_choice_date
 
     all_categories = user_choice_category == ""
-    all_dates = user_choice_date == ["", ""]ö
+    all_dates = user_choice_date == ["", ""]
 
     if all_categories and all_dates then
       operations_data = Operation.pluck(:category_id, :amount).map { |op| [categories_data[op[0]].to_s, op[1]] }
