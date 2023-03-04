@@ -5,50 +5,7 @@
 </div>
 
 <div class="container">
-  <div class="row">
-    <div class="col">
-      <%= link_to "New operation", new_operation_path %>
-    </div>
-    <div class="col">
-      Filter by category
-    </div>
-  </div>
-</div>
-
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-              <th scope="col">#</th>
-              <th scope="col">Category</th>
-              <th scope="col">Amount</th>
-              <th scope="col">Date</th>
-              <th scope="col">Description</th>
-              <th scope="col">Manage</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% i = 0 %>
-          <% @operations.each do |operation| %>
-            <% i += 1 %>
-            <tr>
-              <th scope="row"><%= operation.id %></th>
-              <td><%= @categories_names[operation.category_id] %></td>
-              <td><%= operation.amount %></td>
-              <td><%= operation.odate %></td>
-              <td><%= operation.description %></td>
-              <td><%= link_to "Show", operation %></td>
-              <td>
-
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-  </div>
+  <%= render "show_list_operations", operation: @operation %>
 </div>
 
 <div class="container">

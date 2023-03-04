@@ -4,7 +4,9 @@ class OperationsController < ApplicationController
   # GET /operations or /operations.json
   def index
     @operations = Operation.page(params[:page])
-    @categories_names = Category.pluck(:id, :name).to_h
+    @categories_names = Category.pluck(:name, :id)
+    @categories_options = Category.pluck(:id, :name).to_h
+
   end
 
   # GET /operations/1 or /operations/1.json
@@ -19,6 +21,7 @@ class OperationsController < ApplicationController
 
   # GET /operations/1/edit
   def edit
+    @categories_options = Category.pluck(:name, :id)
   end
 
   # POST /operations or /operations.json
@@ -58,6 +61,12 @@ class OperationsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  # def filter
+  #   filter_choice = params[:category]
+  #   categories_data = Category.pluck(:id, :name).to_h
+  #   @category_filter = Operation.where(category_id: category).map { |op| [categories_data[op,category_id].to_s, op.amount, op.odate, op.description] }
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.

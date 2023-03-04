@@ -5,42 +5,9 @@
     <div class="col">
       <h1>Categories</h1>
     </div>
-    <div class="col">
-      <%= link_to "New category", new_category_path %>
-    </div>
   </div>
 </div>
 
 <div class="container">
-  <div class="row">
-    <div class="col">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-              <th scope="col">#</th>
-              <th scope="col">Name</th>
-              <th scope="col">Description</th>
-              <th scope="col" colspan="2">Manage</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% i = 0 %>
-          <% @categories.each do |category| %>
-            <% i += 1 %>
-            <tr>
-              <th scope="row"><%= i %></th>
-              <td><%= category.name %></td>
-              <td><%= category.description %></td>
-              <td>
-                <%= button_to "Edit", edit_category_path(category), method: :get, class: "btn btn-secondary" %>
-              </td>
-              <td>
-                <%= button_to "Destroy", category, method: :delete, class: "btn btn-secondary" %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-  </div>
+  <%= render "show_list_categories", category: @category %><br>
 </div>
