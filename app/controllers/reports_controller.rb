@@ -19,15 +19,14 @@ class ReportsController < ApplicationController
     date_from, date_to = *user_choice_date
 
     all_categories = user_choice_category == ""
-    all_dates = user_choice_date == ["", ""]
-    categories_data = Category.pluck(:id, :name).to_h
+    all_dates = user_choice_date == ["", ""]ö
 
     if all_categories and all_dates then
       operations_data = Operation.pluck(:category_id, :amount).map { |op| [categories_data[op[0]].to_s, op[1]] }
       operations_per_category_name = count_amounts_per(operations_data)
       @categories_names = operations_per_category_name.keys
       @amounts_per_categories = operations_per_category_name.values
-      
+
     elsif all_categories and not all_dates
       operations_data = Operation.where(odate: (date_from..date_to)).order(:category_id).pluck(
         :category_id, :amount).map { |op| [categories_data[op[0]].to_s, op[1]] }
@@ -94,7 +93,7 @@ class ReportsController < ApplicationController
 
   # POST
   def choose_report_type
-    if params[:by_category]      
+    if params[:by_category]
       redirect_to reports_report_by_category_path(request.parameters)
     elsif params[:by_dates]
       redirect_to reports_report_by_dates_path(request.parameters)
