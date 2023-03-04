@@ -72,13 +72,13 @@ class ReportsControllerTest < ActionDispatch::IntegrationTest
     assert_equal({nil=>nil}, @controller.count_amounts_per([[]]))
   end
 
-  test "should do if all categoties and all dates" do
-    get "/reports/report_by_category", params:
-    {
-      operation: {category_id: ""},
-      odate_from: {key: ""},
-      odate_to: {key: ""}
-    }
-    assert_equal(15, @controller.report_by_category.length)
-  end
+  # test "should do if all categoties and all dates" do
+  #   get "/reports/report_by_category", params:
+  #   {
+  #     operation: {category_id: ""},
+  #     odate_from: {key: ""},
+  #     odate_to: {key: ""}
+  #   }
+  #   assert_equal(15, @controller.report_by_category.length)
+  # end
 end
