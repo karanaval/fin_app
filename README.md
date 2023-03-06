@@ -2,7 +2,7 @@
 
 ## Description
 Educational project for Ruby&RoR course\
-https://fin-app-ed.fly.dev/
+https://fin-app.fly.dev/
 
 ## Start project
 ```sh
