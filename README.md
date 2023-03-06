@@ -7,6 +7,7 @@ https://fin-app-ed.fly.dev/
 ## Start project
 ```sh
 bundle install
+rails db:migrate RAILS_ENV=development # for the first launch
 rails s
 ```
 ## Tests
