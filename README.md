@@ -1,24 +1,17 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Description
+Educational project for Ruby&RoR course\
+https://fin-app-ed.fly.dev/
 
-Things you may want to cover:
+## Start project
+```sh
+bundle install
+rails s
+```
+## Tests
+run all tests:\
+`rails test -v`
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+run one test:\
+`rails test test\<subfolder>\<test_name>`
