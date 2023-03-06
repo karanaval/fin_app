@@ -1,12 +1,12 @@
-# fly.toml file generated for fin-app-ed on 2023-03-06T10:34:28+02:00
+# fly.toml file generated for fin-app on 2023-03-06T15:42:59+02:00
 
-app = "fin-app-ed"
+app = "fin-app"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
 
 [env]
-PORT = "8080"
+  PORT = "8080"
 
 [experimental]
   auto_rollback = true
