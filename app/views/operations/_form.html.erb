@@ -29,8 +29,7 @@
 
   <div>
     <%= select(:operation, :category_id, options_for_select(@categories_options)) %>
-    <%# <%= select(:operation, :category_id, options_for_select(@categories_options), { selected: options_for_select(@categories_options) } || nil ) %>
-
+    <%# <%= select(:operation, :category_id, options_for_select(@categories_options), {select: @category_options[:id]}) %>
   </div>
 
   <div>
