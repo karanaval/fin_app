@@ -1,33 +1,35 @@
-<h1><%= @category_name %></h1>
-<h4><%= @dates_period %></h3>
-
+<p></p>
+<div class="container">
+    <h1><%= @category_name %></h1>
+    <h4><%= @dates_period %></h3>
+</div>
 
 <div class="container">
     <div class="row">
-        <div class="col">
-            <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="scrollspy-example bg-body-tertiary p-3 rounded-2" tabindex="0">
-                  <table class="table table-striped" style="width:300px">
-                    <thead>
+        <div class="my-custom-scrollbar my-custom-scrollbar-primary" style="width:317px">
+            <table class="table table-striped tableFixHead" style="width:300px">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for i in (0...@dates.length) do %>
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Amount</th>
+                            <th scope="row"><%= i + 1 %></th>
+                            <td><%= @dates[i] %></td>
+                            <td><%= @amounts_per_dates[i] %></td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <% for i in (0...@dates.length) do %>
-                            <tr>
-                                <th scope="row"><%= i + 1 %></th>
-                                <td><%= @dates[i] %></td>
-                                <td><%= @amounts_per_dates[i] %></td>
-                            </tr>
-                        <% end %>
-                    </tbody>
-                </table>
-            </div>
+                    <% end %>
+                </tbody>
+            </table>
         </div>
         <div class="col">
             <%= render "chart_by_dates" %>
         </div>
     </div>
 </div>
+
+

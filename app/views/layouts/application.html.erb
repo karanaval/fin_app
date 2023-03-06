@@ -16,6 +16,72 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
+    <script>
+      var myCustomScrollbar = document.querySelector('.my-custom-scrollbar');
+      var ps = new PerfectScrollbar(myCustomScrollbar);
+
+      var scrollbarY = myCustomScrollbar.querySelector('.ps__rail-y');
+
+      myCustomScrollbar.onscroll = function () {
+        scrollbarY.style.cssText = `top: ${this.scrollTop}px!important; height: 400px; right: ${-this.scrollLeft}px`;
+      }
+    </script>
+
+    <style>
+      /* nav link */
+      .nav > li > a       {color:#5D6D7E}
+      .nav > li > a:hover {color:black}
+      .nav > .active > a
+      {
+        color:black !Important;
+        font-size: xx-large !Important
+      }
+
+      /* pagination */
+      .pagination > li > a
+      {
+        background-color: white;
+        color: black;
+      }
+
+      .pagination > li > a:focus,
+      .pagination > li > a:hover,
+      .pagination > li > span:focus,
+      .pagination > li > span:hover
+      {
+        color: #B2BABB;
+        background-color: #eee;
+        border-color: #ddd;
+      }
+
+      .pagination > .active > a
+      {
+        color: white;
+        background-color: #34495E !Important;
+        border: solid 1px #34495E !Important
+      }
+
+      .pagination > .active > a:hover
+      {
+        background-color: #5D6D7E !Important;
+        border: solid 1px #5D6D7E !Important
+      }
+
+      /* scrollbar */
+      .my-custom-scrollbar {
+        position: relative;
+        height: 400px;
+        overflow: auto;
+      }
+
+      .tableFixHead          { overflow: auto; height: 100px; }
+      .tableFixHead thead th { position: sticky; top: 0; z-index: 1; }
+
+      /* Just common table stuff. Really. */
+      table  { border-collapse: collapse; width: 100%; }
+      th, td { padding: 8px 16px; }
+      th     { background: #f8f9fb !Important}
+    </style>
   </head>
 
   <header class="d-flex flex-wrap justify-content-center py-3">

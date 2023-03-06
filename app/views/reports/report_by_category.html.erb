@@ -1,10 +1,13 @@
-<h1><%= @category_name %></h1>
-<h4><%= @dates_period %></h3>
+<p></p>
+<div class="container">
+    <h1><%= @category_name %></h1>
+    <h4><%= @dates_period %></h3>
+</div>
 
 <div class="container">
     <div class="row">
-        <div class="col">
-            <table class="table table-striped" style="width:300px">
+        <div class="my-custom-scrollbar my-custom-scrollbar-primary" style="width:317px">
+            <table class="table table-striped tableFixHead" style="width:300px">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -23,7 +26,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="col">
+        <div class="col" style="height:400px">
             <%= render "chart_by_category" %>
         </div>
     </div>
