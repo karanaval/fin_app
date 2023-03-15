@@ -10,23 +10,27 @@ class Operation < ApplicationRecord
 
   paginates_per 10
 
-  # Choose Operation options for all categories
-  def self.op_data_all_dat(params)
-    pluck(:category_id, :amount).map { |op| [params[op[0]].to_s, op[1]] }
+  # Get Operation data for all categories
+  def self.op_data_all_cat(*args)
+    if args.length == 1 then
+      categories_data = *args
+      pluck(:category_id, :amount).map { |op| [categories_data[0][op[0]].to_s, op[1]] }
+    else
+      date_f, date_t, categories_data = *args
+      where(odate: (date_f..date_t)).order(:category_id).pluck(
+        :category_id, :amount).map { |op| [categories_data[op[0]].to_s, op[1]] }
+    end
   end
 
-  def self.op_data_not_all_dat(date_f, date_t, params)
-    where(odate: (date_f..date_t)).order(:category_id).pluck(
-        :category_id, :amount).map { |op| [params[op[0]].to_s, op[1]] }
-  end
-
-  # Choose Operation options for not all categories
-  def self.am_per_cat_all_dat(params)    
-      where(category_id: params.to_i).pluck(:amount).sum
-  end
-
-  def self.am_per_cat_not_all_dat(date_f, date_t, params)    
-      where(category_id: params.to_i, odate: (date_f..date_t)).pluck(:amount).sum
+  # Get Operation data for selected category
+  def self.am_per_cat(*args)
+    if args.length == 1 then
+      user_choice_category = *args  
+      where(category_id: user_choice_category[0].to_i).pluck(:amount).sum
+    else
+      date_f, date_t, user_choice_category = *args 
+      where(category_id: user_choice_category.to_i, odate: (date_f..date_t)).pluck(:amount).sum
+    end
   end
 
   # Choose odate&amount attributes from Operations model
