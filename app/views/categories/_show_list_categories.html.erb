@@ -24,10 +24,10 @@
             <td><%= category.name %></td>
             <td><%= category.description %></td>
             <td>
-              <%= button_to "Edit", edit_category_path(category), method: :get, class: "btn btn-secondary" %>
+              <%= button_to "Edit", edit_category_path(category), method: :get, class: "btn btn-secondary crud_button" %>
             </td>
             <td>
-              <%= button_to "Destroy", category, method: :delete, class: "btn btn-secondary" %>
+              <%= button_to "Destroy", category, method: :delete, class: "btn btn-secondary crud_button" %>
             </td>
           </tr>
         <% end %>

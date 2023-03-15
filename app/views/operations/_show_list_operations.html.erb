@@ -46,10 +46,10 @@
               <td><%= operation.odate %></td>
               <td><%= operation.description %></td>
               <td>
-                <%= button_to "Edit", edit_operation_path(operation), method: :get, class: "btn btn-secondary" %>
+                <%= button_to "Edit", edit_operation_path(operation), method: :get, class: "btn btn-secondary crud_button" %>
               </td>
               <td>
-                <%= button_to "Destroy", operation, method: :delete, class: "btn btn-secondary" %>
+                <%= button_to "Destroy", operation, method: :delete, class: "btn btn-secondary crud_button" %>
               </td>
             </tr>
           <% end %>

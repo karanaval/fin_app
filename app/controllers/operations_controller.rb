@@ -16,18 +16,19 @@ class OperationsController < ApplicationController
   # GET /operations/new
   def new
     @operation = Operation.new
-    @categories_options = Category.pluck(:name, :id)
+    @categories_names = Category.pluck(:name, :id)
   end
 
   # GET /operations/1/edit
   def edit
-    @categories_options = Category.pluck(:name, :id)
+    @categories_names = Category.pluck(:name, :id)
     # @category_options = @categories_options.to_h
   end
 
   # POST /operations or /operations.json
   def create
-    @operation = Operation.new(operation_params)
+    @operation = Operation.new(operation_params)    
+    @categories_names = Category.pluck(:name, :id)
 
     respond_to do |format|
       if @operation.save
