@@ -1,6 +1,6 @@
 class ReportsController < ApplicationController
   def index
-    @categories_options = Category.all.map{ |cat| [cat.name, cat.id] }
+    @categories_options = Category.pluck(:name, :id)
   end
 
   # counting sum of operations' amounts by similar argument
@@ -23,14 +23,13 @@ class ReportsController < ApplicationController
     categories_data = Category.pluck(:id, :name).to_h
 
     if all_categories and all_dates then
-      operations_data = Operation.pluck(:category_id, :amount).map { |op| [categories_data[op[0]].to_s, op[1]] }
+      operations_data = Operation.op_data_all_dat(categories_data)
       operations_per_category_name = count_amounts_per(operations_data)
       @categories_names = operations_per_category_name.keys
       @amounts_per_categories = operations_per_category_name.values
 
     elsif all_categories and not all_dates
-      operations_data = Operation.where(odate: (date_from..date_to)).order(:category_id).pluck(
-        :category_id, :amount).map { |op| [categories_data[op[0]].to_s, op[1]] }
+      operations_data = Operation.op_data_not_all_dat(date_from, date_to, categories_data)
 
       operations_per_category_id = count_amounts_per(operations_data)
       @categories_names = operations_per_category_id.keys
@@ -38,23 +37,17 @@ class ReportsController < ApplicationController
 
     elsif not all_categories and all_dates
       @categories_names = Category.where(id: user_choice_category.to_i).pluck(:name)
-      @amounts_per_categories = [Operation.where(category_id: user_choice_category.to_i).pluck(:amount).sum]
+      @amounts_per_categories = [Operation.am_per_cat_all_dat(user_choice_category)]
 
     else
       @categories_names = Category.where(id: user_choice_category.to_i).pluck(:name)
-      @amounts_per_categories = [Operation.where(category_id: user_choice_category.to_i, odate: (date_from..date_to)
-      ).pluck(:amount).sum]
+      @amounts_per_categories = [Operation.am_per_cat_not_all_dat(date_from, date_to, user_choice_category)]
     end
 
     @category_name = all_categories ? "All categories" : Category.where(id: user_choice_category).pluck(:name).join()
     @dates_period = all_dates ? "for all period" : "from #{
       date_from.split("-").reverse.join("-")} to #{user_choice_date[-1].split("-").reverse.join("-")}"
 
-  end
-
-  # Choose odate&amount attributes from Operations model
-  def get_sorted_dates_and_amounts(arg)
-    result = arg.order(:odate).pluck(:odate, :amount).map { |op| [op[0].to_s, op[1]] }
   end
 
   # POST reports/report_by_dates
@@ -67,20 +60,14 @@ class ReportsController < ApplicationController
     all_categories = user_choice_category == ""
     all_dates = user_choice_date == ["", ""]
 
-    if all_categories and all_dates  then
-      operations_data = get_sorted_dates_and_amounts(Operation)
-
-    elsif all_categories and not all_dates then
-      operations_data = get_sorted_dates_and_amounts(Operation.where(odate: (date_from..date_to)))
-
-    elsif not all_categories and all_dates  then
-      operations_data = get_sorted_dates_and_amounts(Operation.where(category_id: user_choice_category))
-
-    else
-      operations_data = get_sorted_dates_and_amounts(
-        Operation.where(category_id: user_choice_category, odate: (date_from..date_to)))
-
-    end
+    operations_data = Operation.choose_option
+    (
+      date_from = date_from,
+      date_to = date_to,
+      user_choice_category = user_choice_category,
+      all_categories = all_categories,
+      all_dates = all_dates
+      )
 
     operations_per_date = count_amounts_per(operations_data)
 
