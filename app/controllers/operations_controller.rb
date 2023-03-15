@@ -1,11 +1,14 @@
 class OperationsController < ApplicationController
   before_action :set_operation, only: %i[ show edit update destroy ]
 
+  def categories_names    
+    @categories_names = Category.pluck(:name, :id)
+  end
+
   # GET /operations or /operations.json
   def index
     @operations = Operation.page(params[:page])
-    @categories_names = Category.pluck(:name, :id)
-    @categories_options = Category.pluck(:id, :name).to_h
+    @categories_options = self.categories_names.to_h
 
   end
 
@@ -16,19 +19,18 @@ class OperationsController < ApplicationController
   # GET /operations/new
   def new
     @operation = Operation.new
-    @categories_names = Category.pluck(:name, :id)
+    self.categories_names
   end
 
   # GET /operations/1/edit
   def edit
-    @categories_names = Category.pluck(:name, :id)
-    # @category_options = @categories_options.to_h
+    self.categories_names
   end
 
   # POST /operations or /operations.json
   def create
     @operation = Operation.new(operation_params)    
-    @categories_names = Category.pluck(:name, :id)
+    self.categories_names
 
     respond_to do |format|
       if @operation.save

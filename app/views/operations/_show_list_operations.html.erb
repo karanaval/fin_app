@@ -41,7 +41,7 @@
             <% i += 1 %>
             <tr>
               <th scope="row"><%= operation.id %></th>
-              <td><%= @categories_options[operation.category_id] %></td>
+              <td><%= @categories_options.key(operation.category_id) %></td>
               <td><%= operation.amount %></td>
               <td><%= operation.odate %></td>
               <td><%= operation.description %></td>
